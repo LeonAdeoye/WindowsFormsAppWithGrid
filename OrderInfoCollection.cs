@@ -14,6 +14,9 @@ namespace WindowsFormsAppWithGrid
 
         public OrderInfoCollection()
         {
+            // If the data source implements INotifyCollectionChanged interface, then SfDataGrid control will automatically refresh the UI when item is added, removed or while list cleared.
+            // When an item is added / removed in ObservableCollection, SfDataGrid automatically refresh the UI as ObservableCollection implements INotifyCollectionChanged.
+            // But when an item is added / removed in List, SfDataGrid will not refresh the UI automatically.
             Orders = new ObservableCollection<OrderInfo>();
             this.GenerateOrders();
         }
