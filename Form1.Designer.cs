@@ -35,9 +35,14 @@
             // sfDataGrid1
             // 
             this.sfDataGrid1.AccessibleName = "Table";
+            this.sfDataGrid1.AddNewRowPosition = Syncfusion.WinForms.DataGrid.Enums.RowPosition.Bottom;
+            this.sfDataGrid1.AllowDeleting = true;
+            this.sfDataGrid1.AllowFiltering = true;
+            this.sfDataGrid1.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
             this.sfDataGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sfDataGrid1.Location = new System.Drawing.Point(0, 0);
             this.sfDataGrid1.Name = "sfDataGrid1";
+            this.sfDataGrid1.ShowGroupDropArea = true;
             this.sfDataGrid1.Size = new System.Drawing.Size(548, 339);
             this.sfDataGrid1.TabIndex = 0;
             this.sfDataGrid1.Text = "sfDataGrid1";

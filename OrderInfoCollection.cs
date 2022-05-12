@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace WindowsFormsAppWithGrid
 {
     public class OrderInfoCollection
     {
-        private List<OrderInfo> _orders;
+        private ObservableCollection<OrderInfo> _orders;
 
-        public List<OrderInfo> Orders 
+        public ObservableCollection<OrderInfo> Orders 
         {
             get { return _orders; }
             set { _orders = value; }
@@ -18,7 +14,7 @@ namespace WindowsFormsAppWithGrid
 
         public OrderInfoCollection()
         {
-            Orders = new List<OrderInfo>();
+            Orders = new ObservableCollection<OrderInfo>();
             this.GenerateOrders();
         }
 
@@ -43,7 +39,7 @@ namespace WindowsFormsAppWithGrid
                 CustomerName = "Saori Adeoye",
                 City = "Yokohama",
                 Country = "Japan",
-                OrderId = 20221212
+                OrderId = 20121223
             });
 
         }
