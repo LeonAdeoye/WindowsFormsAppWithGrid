@@ -20,28 +20,30 @@ namespace WindowsFormsAppWithGrid
 
         private void GenerateOrders()
         {
-            _orders.Add(new OrderInfo
+            for(int i = 1; i <= 1000; i++)
             {
-                CustomerName = "Horatio Adeoye",
-                City = "Tokyo",
-                Country = "Japan",
-                OrderId = 20121223
-            });
-            _orders.Add(new OrderInfo
-            {
-                CustomerName = "Harper Adeoye",
-                City = "Liverpool",
-                Country = "United Kingdom",
-                OrderId = 20120615
-            });
-            _orders.Add(new OrderInfo
-            {
-                CustomerName = "Saori Adeoye",
-                City = "Yokohama",
-                Country = "Japan",
-                OrderId = 20121223
-            });
-
+                _orders.Add(new OrderInfo
+                {
+                    CustomerName = "Horatio Adeoye",
+                    City = "Tokyo",
+                    Country = "Japan",
+                    OrderId = string.Format("{0:D4}", i)
+                });
+                _orders.Add(new OrderInfo
+                {
+                    CustomerName = "Harper Adeoye",
+                    City = "Liverpool",
+                    Country = "United Kingdom",
+                    OrderId = string.Format("{0:D4}", i)
+                });
+                _orders.Add(new OrderInfo
+                {
+                    CustomerName = "Saori Adeoye",
+                    City = "Yokohama",
+                    Country = "Japan",
+                    OrderId = string.Format("{0:D4}", i)
+                });
+            }
         }
     }
 }
