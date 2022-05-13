@@ -1,15 +1,18 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Syncfusion.Data;
+﻿using Syncfusion.Data;
+using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.WinForms.Core;
 using Syncfusion.WinForms.Core.Enums;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
-using Syncfusion.WinForms.DataGrid.Styles;
 using Syncfusion.WinForms.DataGridConverter;
-
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+// To avoid clashes between DataGrid and GridControl styling.
+using GridBorder = Syncfusion.WinForms.DataGrid.Styles.GridBorder;
+using GridBorderWeight = Syncfusion.WinForms.DataGrid.Styles.GridBorderWeight;
+using GridFontInfo = Syncfusion.WinForms.DataGrid.Styles.GridFontInfo;
 
 namespace WindowsFormsAppWithGrid
 {
@@ -71,8 +74,72 @@ namespace WindowsFormsAppWithGrid
             this.sfDataGrid1.Style.BorderStyle = BorderStyle.Fixed3D;
 
             this.sfDataGrid1.CurrentCellEndEdit += DataGrid_CurrentCellEndEdit;
+            this.sfDataGrid1.QueryCellStyle += DataGrid1_QueryCellStyle;
 
-            ShowSummary();            
+            ShowSummary();
+
+            PopulateGridControl();
+        }
+
+        private void PopulateGridControl()
+        {
+            gridControl1.RowCount = 22;
+
+            gridControl1.ColCount = 15;
+
+            //Looping through the cells and assigning the values based on row and column index
+            for (int row = 1; row <= gridControl1.RowCount; row++)
+            {
+                for (int col = 1; col <= gridControl1.ColCount; col++)
+                {
+                    gridControl1.Model[row, col].CellValue = string.Format("{0}/{1}", row, col);
+                }
+            }
+
+            //Creates GridStyleInfo object.
+            GridStyleInfo style = new GridStyleInfo
+            {
+                //Set properties to it.
+                BackColor = Color.DarkGreen,
+                TextColor = Color.White
+            };
+
+            style.Font.Facename = "Verdana";
+            style.Font.Bold = true;
+            style.Font.Size = 9f;
+            // By default the GridControl is in editable state. Editing can be enabled or disabled by using the ReadOnly property. This property can be applied for whole grid as well as cell by cell basis.
+            style.ReadOnly = true;
+
+            // Set values and text color for a particular row
+            this.gridControl1.RowStyles[3].TextColor = Color.Blue;
+            this.gridControl1.RowStyles[3].CellValue = "Blue";
+
+            // Set values and text color for a particular column
+            this.gridControl1.ColStyles[3].TextColor = Color.Red;
+            this.gridControl1.ColStyles[3].CellValue = "Red";
+
+            // The ToolTip can be added to the particular cell by setting the CellTipText property of a cell. The tool tip text will be displayed in the tool tip.
+            this.gridControl1[2, 2].CellTipText = "Here is a tooltip in cell (2,2)";
+
+            // Apply the style to desired range of cells.
+            this.gridControl1.ChangeCells(GridRangeInfo.Cells(2, 2, 4, 2), style);
+        }
+
+        private void DataGrid1_QueryCellStyle(object sender, QueryCellStyleEventArgs e)
+        {
+            if (e.Column.MappingName == "CustomerName")
+            {
+                if (e.DisplayText == "Harper Adeoye")
+                {
+                    e.Style.BackColor = Color.Coral;
+                    e.Style.TextColor = Color.White;
+                }
+                else if (e.DisplayText == "Horatio Adeoye")
+                {
+                    e.Style.BackColor = Color.LightSkyBlue;
+                    e.Style.TextColor = Color.DarkSlateBlue;
+                }
+            }
         }
 
         void DataGrid_CurrentCellEndEdit(object sender, CurrentCellEndEditEventArgs e)
